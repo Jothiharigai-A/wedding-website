@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0288d1;
+      --secondary-color: #01579b;
+      --bg-light: #f0faff;
+      --text-dark: #003049;
+      --fade-speed: 1s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: "Great Vibes", cursive;
+      font-size: 26px;
+      color: #0066cc;
+    }
+
+    .logo span {
+      font-size: 14px;
+      display: block;
+      color: var(--secondary-color);
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+
+    /* Responsive: small screens */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: white;
+        width: 100%;
+        padding: 10px 0;
+        display: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav a {
+        padding: 10px 20px;
+      }
+    }
+
+
+    .hero {
+      height: 100vh;
+      background: url("images/frt.png") center center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background-attachment: fixed;
+      padding: 20px;
+    }
+
+    .overlay {
+      background: rgba(238, 236, 236, 0.85);
+      padding: 40px;
+      border-radius: 12px;
+      animation: fadeInUp var(--fade-speed) ease-in-out;
+    }
+
+    .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 64px;
+      color: var(--primary-color);
+      animation: zoomIn 1.2s ease;
+    }
+
+    .heart {
+      display: inline-block;
+      font-size: 32px;
+      animation: pulse 2s infinite;
+      color: var(--primary-color);
+    }
+
+    .date,
+    .save {
+      margin-top: 10px;
+      font-size: 20px;
+      animation: fadeIn 2s ease;
+    }
+
+    section {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      animation: bounceIn 1s ease;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 10px auto;
+      color: var(--text-dark);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .gallery-item {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(2, 136, 209, 0.2);
+      transition: transform 0.3s ease;
+      animation: fadeInUp 1s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(2, 136, 209, 0.3);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-item p {
+      padding: 10px;
+      font-size: 16px;
+      color: var(--secondary-color);
+    }
+
+    .map-container iframe {
+      border: none;
+      width: 100%;
+      height: 350px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .heart-float {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.5;
+    }
+
+    .heart-float:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .heart-float:nth-child(2) {
+      left: 30%;
+      animation-delay: 2s;
+    }
+
+    .heart-float:nth-child(3) {
+      left: 60%;
+      animation-delay: 4s;
+    }
+
+    .heart-float:nth-child(4) {
+      left: 80%;
+      animation-delay: 6s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      60% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .names {
+        font-size: 42px;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .overlay {
+        padding: 20px;
+      }
+
+      section {
+        padding: 60px 15px;
+      }
+
+      .logo {
+        font-size: 26px;
+      }
+    }
+
+    footer {
+      background-color: var(--secondary-color);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #ffcdd2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Sibi ♥ Swarna <span>ARE GETTING ENGAGED</span></div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <nav id="navbar">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#love">Love Story</a></li>
+        <li><a href="#events">Events & Gallery</a></li>
+        <li><a href="#marriage">Marriage Update</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <div id="home" class="hero">
+    <div class="overlay">
+      <div class="names">Mr <span class="heart">♥</span> Mrs. July</div>
+      <div class="date">8 June 2025</div>
+      <div class="save">SAVE THE DATE</div>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>💑 Meet Sibi & Swarna — “Love is not about looking at each other, but about looking together in the same direction.” 💖
+<br>
+They’re not just a couple — they’re a team with one mind and two hearts.</p>
+    <p>Both planners, both dreamers — Sibi brings calm wisdom and cool-headed leadership,
+while Swarna adds kindness, honesty, and the magic of thoughtful care.</p>
+<p>They think alike, laugh in sync, and somehow always crave the same midnight snack.
+From shared glances to silent giggles, their bond is built on heart and humor.
+They plan with purpose, love with depth, and dance through life like it’s their favorite song.
+Together, they’re not just a couple — they’re each other’s calm, chaos, and happily ever after. 💕</p>
+  </section>
+
+  <section id="love" style="background-color: #fff0f6;">
+    <h2>💖 Our Love Story – A Journey from Text to Together Forever 💖</h2>
+    <p>It all began with a simple message on Instagram —
+📅 August 8, 2023 — the first text that would change everything.</p>
+<p>From that moment, she had a little secret wish in her heart: "If this is meant to be, I want a proposal from him within two weeks."
+And destiny heard her.
+<br>
+Just a month later, on September 7, 2023, he proposed — and without a moment’s hesitation, she said “OK”.
+That simple, heartfelt moment sparked the beginning of a love story they would write together.
+<br>
+Their first in-person meeting was on October 12, 2023, at a quiet park — a day filled with nervous smiles and soft glances.
+But love, as it often does, refused to wait. On October 21, unable to bear the distance, he rushed all the way from Solavanthan to Paramakudi, just to see her at the Paramakudi railway station.
+That day proved — this wasn’t just a love story, it was a connection written in the stars.
+<br>
+
+Then came a sacred milestone —
+On January 21, 2024, they visited Alagar Kovil in Madurai with their families.
+He took a selfie from afar, and there she was — a tiny, beautiful figure in the photo, like a miniature doll framed by fate.
+Moved by the memory, they visited again — this time on January 20, 2024, as a couple.
+<br>
+And then came a special night on February 12, 2024 — their first overnight family trip to Palani Kovil.
+Laughter, moments, and togetherness stitched their bond even stronger.
+<br>
+
+As days passed, their love only grew — strong, unshakable, unstoppable.
+And like every great love story, theirs had challenges.
+But together, they faced every struggle, every “no”, every tear — until the families finally said yes.
+<br>
+The official visits followed:
+👨‍👩‍👧‍👦 His family visited her home on February 9, 2025
+👨‍👩‍👧‍👦 Her family visited his on February 23, 2025
+And then came the happiest decision of their lives —
+<br>
+💍 Engagement fixed on June 8, 2025
+💒 Wedding day sealed for August 29, 2025
+<br>
+The celebrations began early —
+🎁 They started wedding shopping on April 10, 2025,
+👗 And found their perfect engagement outfits on April 30, 2025
+<br>
+And now, here they are — on their big engagement day,
+smiling at each other, hearts full of memories,
+telling their story to the world.
+<br>
+“This is just the beginning,” they say,
+“…because our love story is still being written — with every hug, every day, every laugh, and every ‘I love you’.”
+<br>
+<br>
+"LOVE YOU LOTS, MY RE RE KUTTYY ❤️"
+"I wish to see that happy, smiling face forever and ever."</p>
+    
+  </section>
+
+  <section id="events">
+    <h2>Events & Gallery</h2>
+    <p>Here’s our journey in snapshots 💑</p>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/personal.jpg">
+        <p>"FIRST PERSONAL MEET 💙 !"</p>
+      </div>
+       <div class="gallery-item"><img src="images/railway.png">
+        <p>RAILWAY STATION 💙 !</p>
+      </div>
+       <div class="gallery-item"><img src="images/scooty.jpg">
+        <p>BIRTHDAY CELEBRATION 💙 !</p>
+      </div>
+      <div class="gallery-item"><img src="images/palani.jpg">
+        <p>"PALANI KOVIL 💙 !"</p>
+      </div>
+      <div class="gallery-item"><img src="images/her.png">
+        <p>"OFFICIALLY IN HER HOME 💙!"</p>
+      </div>
+      <div class="gallery-item"><img src="images/boy.png">
+        <p>"THE OFFICIAL FAMILY VISIT TO HIS HOME 💙!"</p>
+      </div>
+      <div class="gallery-item"><img src="images/eng.png">
+        <p>"ENGAGEMENT PURCHASE” 💍</p>
+      </div>
+      <div class="gallery-item"><img src="images/mrgpur.jpg">
+        <p>"MARRIAGE PURCHASE” 💍</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <section id="marriage" style="background-color: #e0f7fa;">
+    <h2>We're Getting Married!</h2>
+    <p><strong>Date:</strong> 29th Auguest 2025</p>
+    <p><strong>Venue:</strong> Lena Mahal, Paramakudi.</p>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.568584762586!2d78.5870671!3d9.5461579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b010617bd4267cf%3A0xbc102bfdecfe2b02!2sLena%20Mahal!5e0!3m2!1sen!2sin!4v1749271192058!5m2!1sen!2sin"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Floating hearts -->
+  <div class="heart-float">❤️</div>
+  <div class="heart-float">💙</div>
+  <div class="heart-float">💖</div>
+  <div class="heart-float">💘</div>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+<footer>
+  | Made with LOVE by Kaarigai ❤️ |
+
+</footer>
+
+</html>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const navList = document.querySelector('nav ul');
+
+  toggle.addEventListener('click', () => {
+    navList.classList.toggle('show');
+  });
+
+  // Optional: close menu after clicking a link (for mobile)
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('show');
+    });
+  });
+</script>
